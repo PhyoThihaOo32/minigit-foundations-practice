@@ -89,3 +89,31 @@ One detail: the first original expression is not guaranteed to fail on Windows,
 because Windows paths can accept forward slashes. Using path joins is still
 clearer and avoids building paths by hand. Compare path values in tests rather
 than depending on how their separators print.
+
+
+## Exercise 4 - Fill in the blanks
+
+1. `!file.parent_path().empty()`
+2. `create_directories`
+3. `!output`
+4. `static_cast<bool>(output)`
+
+```cpp
+bool save(const std::filesystem::path& file, const std::string& text) {
+    if (!file.parent_path().empty()) {
+        std::filesystem::create_directories(file.parent_path());
+    }
+    std::ofstream output(file);
+    if (!output) {
+        return false;
+    }
+    output << text;
+    return static_cast<bool>(output);
+}
+```
+
+A bare filename has no parent directory, so there is nothing to create.
+`create_directories` creates all missing parents. `!output` checks whether
+opening failed, and the final conversion checks the stream after writing.
+This completes the supplied skeleton; a directory-creation error can still
+throw, and a production writer should also check flushing/closing failures.
