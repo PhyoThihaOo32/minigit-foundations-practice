@@ -31,3 +31,38 @@ f: .txt
 The recorded draft predictions all matched this run. The important case is b:
 a rooted right-hand path replaces the relative path on its left. This is why
 `"HEAD"` and `"/HEAD"` are not interchangeable.
+
+
+## Exercise 2 - Keep the newlines
+
+`std::getline` removes the newline delimiter. Adding just `line` to `text`
+therefore changes `"a\nb\n"` to `"ab"`. Adding a newline after every line would
+also change a file that originally had no final newline. Read the characters
+as they are instead:
+
+```cpp
+#include <filesystem>
+#include <fstream>
+#include <stdexcept>
+#include <string>
+
+std::string readAll(const std::filesystem::path& file) {
+    std::ifstream input(file, std::ios::binary);
+    if (!input) {
+        throw std::runtime_error("Cannot open file: " + file.string());
+    }
+
+    std::string text;
+    char character;
+    while (input.get(character)) {
+        text += character;
+    }
+    if (input.bad() || !input.eof()) {
+        throw std::runtime_error("Cannot read file: " + file.string());
+    }
+    return text;
+}
+```
+
+Binary mode also prevents Windows newline translation, so the function keeps
+all bytes, including spaces, blank lines, and the final newline if present.
