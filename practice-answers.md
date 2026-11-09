@@ -117,3 +117,10 @@ A bare filename has no parent directory, so there is nothing to create.
 opening failed, and the final conversion checks the stream after writing.
 This completes the supplied skeleton; a directory-creation error can still
 throw, and a production writer should also check flushing/closing failures.
+
+
+## Exercise 5 - Add indexFile
+
+`indexFile` returns `metadataDirectory(root) / "index.txt"`. The extra check
+uses `course/team/repo`, so the function is not tied to one root. All four
+checks pass.
