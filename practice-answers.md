@@ -66,3 +66,26 @@ std::string readAll(const std::filesystem::path& file) {
 
 Binary mode also prevents Windows newline translation, so the function keeps
 all bytes, including spaces, blank lines, and the final newline if present.
+
+
+## Exercise 3 - Fix the path joins
+
+The first function turns the root into a string and manually adds a separator.
+Use the path `/` operator to join path parts instead. The second function adds
+`"/HEAD"`, which is rooted, so it loses the intended project-directory prefix.
+Use the relative part `"HEAD"` and reuse `metadataDirectory`:
+
+```cpp
+std::filesystem::path metadataDirectory(const std::filesystem::path& root) {
+    return root / ".minigit";
+}
+
+std::filesystem::path headFile(const std::filesystem::path& root) {
+    return metadataDirectory(root) / "HEAD";
+}
+```
+
+One detail: the first original expression is not guaranteed to fail on Windows,
+because Windows paths can accept forward slashes. Using path joins is still
+clearer and avoids building paths by hand. Compare path values in tests rather
+than depending on how their separators print.
