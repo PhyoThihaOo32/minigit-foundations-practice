@@ -18,22 +18,29 @@ void check(bool condition, const std::string& message) {
     if (!condition) ++failures;
 }
 
-// TODO: return every character of the file.
-// If the file cannot be opened, throw std::runtime_error with a message that
-// contains the file name, for example:
-//     throw std::runtime_error("Cannot open file: " + file.string());
-// Hint: the reading part is the same as HW8's readTextFile.
+// Binary mode preserves the file's newline bytes on every platform.
 std::string readOrThrow(const fs::path& file) {
-    (void)file;
-    return "";   // replace this line
+    std::ifstream input(file, std::ios::binary);
+    if (!input) {
+        throw std::runtime_error("Cannot open file: " + file.string());
+    }
+
+    std::ostringstream contents;
+    contents << input.rdbuf();
+    if (input.bad() || contents.bad()) {
+        throw std::runtime_error("Cannot read file: " + file.string());
+    }
+    return contents.str();
 }
 
-// TODO: call readOrThrow(file) inside a try block and return its text.
-// In the catch block, catch const std::runtime_error& error,
-// print "Sorry: " followed by error.what(), and return "".
+// Handle the error at the caller, where a fallback can be chosen.
 std::string readOrDefault(const fs::path& file) {
-    (void)file;
-    return "not written yet";   // replace this function body
+    try {
+        return readOrThrow(file);
+    } catch (const std::runtime_error& error) {
+        std::cout << "Sorry: " << error.what() << '\n';
+        return "";
+    }
 }
 
 int main() {

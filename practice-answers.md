@@ -2,7 +2,7 @@
 
 ## Exercise 1 - Predict the output
 
-Draft predictions recorded before running `ex1_predictions.cpp`:
+Predictions recorded before running `ex1_predictions.cpp`:
 
 | Line | Prediction |
 | --- | --- |
@@ -28,7 +28,7 @@ e: 1
 f: .txt
 ```
 
-The recorded draft predictions all matched this run. The important case is b:
+The recorded predictions all matched this run. The important case is b:
 a rooted right-hand path replaces the relative path on its left. This is why
 `"HEAD"` and `"/HEAD"` are not interchangeable.
 
@@ -140,3 +140,12 @@ The constructor uses `: root_(root)` to initialize the member. `root()` returns
 a const reference to that stored path, `metadataDirectory()` appends
 `.minigit`, and `headFile()` reuses it. The supplied class declaration stays
 unchanged. Both objects keep their own roots, and all four checks pass.
+
+
+## Exercise 8 - Throw and catch an error
+
+`readOrThrow` opens the file in binary mode, reads the full buffer, and throws
+`std::runtime_error` naming the file if opening or reading fails.
+`readOrDefault` calls it in a `try` block, catches the error by const reference,
+prints `Sorry: ` plus the message, and returns an empty string. All five
+checks pass, including exact newlines and the missing-file case.
