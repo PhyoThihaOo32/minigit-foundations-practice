@@ -124,3 +124,11 @@ throw, and a production writer should also check flushing/closing failures.
 `indexFile` returns `metadataDirectory(root) / "index.txt"`. The extra check
 uses `course/team/repo`, so the function is not tied to one root. All four
 checks pass.
+
+
+## Exercise 6 - Write the tests
+
+The three checks cover a top-level file, a file inside `docs`, and preservation
+of `filename()`. Expected paths are built with `/` and compared as path
+values. A failed check increments `failures`, which makes the program return
+1 so CTest sees the failure. All three checks pass.
