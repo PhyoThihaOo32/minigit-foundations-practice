@@ -1,0 +1,13 @@
+Test project /Users/phyothihaoo/Desktop/CUNY/FALL2026/CSC350H/minigit-foundations-practice/build
+    Start 1: ex5_index_file
+1/4 Test #1: ex5_index_file ...................   Passed    0.01 sec
+    Start 2: ex6_write_tests
+2/4 Test #2: ex6_write_tests ..................   Passed    0.01 sec
+    Start 3: ex7_class
+3/4 Test #3: ex7_class ........................   Passed    0.01 sec
+    Start 4: ex8_exceptions
+4/4 Test #4: ex8_exceptions ...................   Passed    0.01 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =   0.04 sec
