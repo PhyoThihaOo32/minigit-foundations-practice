@@ -33,26 +33,20 @@ private:
 
 // ---------------------------------------------------------------------
 // The DEFINITIONS (normally in a .cpp file). Each starts with RepoLayout::
-// TODO: replace each body.
-
-// Hint: use a member initializer list:  : root_(root) { }
-RepoLayout::RepoLayout(const fs::path& root) {
-    (void)root;
+// Initialize the stored root before any member functions use it.
+RepoLayout::RepoLayout(const fs::path& root) : root_(root) {
 }
 
-// Hint: return the member variable.
 const fs::path& RepoLayout::root() const {
     return root_;
 }
 
-// Hint: same as HW8, but use root_ instead of a parameter.
 fs::path RepoLayout::metadataDirectory() const {
-    return {};
+    return root_ / ".minigit";
 }
 
-// Hint: reuse metadataDirectory().
 fs::path RepoLayout::headFile() const {
-    return {};
+    return metadataDirectory() / "HEAD";
 }
 
 // ---------------------------------------------------------------------

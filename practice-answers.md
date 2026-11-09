@@ -132,3 +132,11 @@ The three checks cover a top-level file, a file inside `docs`, and preservation
 of `filename()`. Expected paths are built with `/` and compared as path
 values. A failed check increments `failures`, which makes the program return
 1 so CTest sees the failure. All three checks pass.
+
+
+## Exercise 7 - Define RepoLayout
+
+The constructor uses `: root_(root)` to initialize the member. `root()` returns
+a const reference to that stored path, `metadataDirectory()` appends
+`.minigit`, and `headFile()` reuses it. The supplied class declaration stays
+unchanged. Both objects keep their own roots, and all four checks pass.
